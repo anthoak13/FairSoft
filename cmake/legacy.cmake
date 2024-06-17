@@ -427,7 +427,7 @@ ExternalProject_Add(geant4_vmc
     "-DGeant4VMC_USE_VGM=ON"
     "-DGeant4VMC_USE_GEANT4_UI=OFF"
     "-DGeant4VMC_USE_GEANT4_VIS=OFF"
-    "-DGeant4VMC_USE_GEANT4_G3TOG4=ON"
+    "-DGeant4VMC_USE_GEANT4_G3TOG4=OFF"
     "-DWITH_TEST=OFF"
   DEPENDS clhep geant4  vgm vmc ${extract_source_cache_target}
   ${LOG_TO_FILE}
