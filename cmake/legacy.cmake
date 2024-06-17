@@ -57,7 +57,7 @@ if(ICU_ROOT)
   set(boost_icu_config "--with-icu=${ICU_ROOT}")
 endif()
 
-find_package(ROOT)
+find_package(ROOT REQUIRED)
 
 find_package(Python 3 REQUIRED COMPONENTS Interpreter Development)
 get_target_property(Python_EXECUTABLE Python::Interpreter LOCATION)
@@ -396,7 +396,7 @@ set(vmc_version "2-0")
 ExternalProject_Add(vmc
   GIT_REPOSITORY https://github.com/vmc-project/vmc GIT_TAG v${vmc_version}
   ${CMAKE_DEFAULT_ARGS} ${LOG_TO_FILE}
-  DEPENDS root ${extract_source_cache_target}
+  DEPENDS  ${extract_source_cache_target}
 )
 
 #list(APPEND packages geant3)
@@ -415,7 +415,7 @@ ExternalProject_Add(vgm
   GIT_REPOSITORY https://github.com/vmc-project/vgm GIT_TAG v${vgm_version}
   ${CMAKE_DEFAULT_ARGS} CMAKE_ARGS
     "-DWITH_TEST=OFF"
-  DEPENDS clhep geant4 root ${extract_source_cache_target}
+  DEPENDS clhep geant4  ${extract_source_cache_target}
   ${LOG_TO_FILE}
 )
 
@@ -429,7 +429,7 @@ ExternalProject_Add(geant4_vmc
     "-DGeant4VMC_USE_GEANT4_VIS=OFF"
     "-DGeant4VMC_USE_GEANT4_G3TOG4=ON"
     "-DWITH_TEST=OFF"
-  DEPENDS clhep geant4 root vgm vmc ${extract_source_cache_target}
+  DEPENDS clhep geant4  vgm vmc ${extract_source_cache_target}
   ${LOG_TO_FILE}
 )
 
@@ -465,7 +465,7 @@ ExternalProject_Add(fairsoft-config
   GIT_REPOSITORY https://github.com/FairRootGroup/fairsoft-config GIT_TAG master
   ${CMAKE_DEFAULT_ARGS} CMAKE_ARGS
   "-DFAIRSOFT_VERSION=nov22"
-  DEPENDS root ${extract_source_cache_target}
+  DEPENDS  ${extract_source_cache_target}
   ${LOG_TO_FILE}
 )
 
