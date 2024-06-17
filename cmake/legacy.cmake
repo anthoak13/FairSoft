@@ -56,6 +56,9 @@ if(ICU_ROOT)
   set(icu "-DICU_ROOT=${ICU_ROOT}")
   set(boost_icu_config "--with-icu=${ICU_ROOT}")
 endif()
+
+find_package(ROOT)
+
 find_package(Python 3 REQUIRED COMPONENTS Interpreter Development)
 get_target_property(Python_EXECUTABLE Python::Interpreter LOCATION)
 get_filename_component(Python_EXECUTABLE_NAME "${Python_EXECUTABLE}" NAME)
