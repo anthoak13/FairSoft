@@ -111,14 +111,14 @@ ExternalProject_Add(faircmakemodules
   ${LOG_TO_FILE}
 )
 
-list(APPEND packages asio)
-set(asio_version "1.24.0")
-ExternalProject_Add(asio
-  GIT_REPOSITORY https://github.com/FairRootGroup/asio GIT_TAG v${asio_version}
-  ${CMAKE_DEFAULT_ARGS}
-  DEPENDS ${extract_source_cache_target}
-  ${LOG_TO_FILE}
-)
+#list(APPEND packages asio)
+#set(asio_version "1.24.0")
+#ExternalProject_Add(asio
+#  GIT_REPOSITORY https://github.com/FairRootGroup/asio GIT_TAG v${asio_version}
+#  ${CMAKE_DEFAULT_ARGS}
+#  DEPENDS ${extract_source_cache_target}
+#  ${LOG_TO_FILE}
+#)
 
 list(APPEND packages boost)
 set(boost_version "80")
@@ -166,25 +166,25 @@ ExternalProject_Add(fmt
 if(ICU_ROOT)
   set(dds_icu_hint "-DDDS_LD_LIBRARY_PATH=${ICU_ROOT}/lib")
 endif()
-list(APPEND packages dds)
-set(dds_version "3.6")
-ExternalProject_Add(dds
-  GIT_REPOSITORY https://github.com/FairRootGroup/DDS GIT_TAG ${dds_version}
-  ${CMAKE_DEFAULT_ARGS} CMAKE_ARGS
-    "-DBoost_NO_BOOST_CMAKE=ON"
-    ${dds_icu_hint}
-  PATCH_COMMAND ${patch} -p1 -i "${CMAKE_SOURCE_DIR}/legacy/dds/fix_boost_lookup.patch"
-  COMMAND ${patch} -p1 -i "${CMAKE_SOURCE_DIR}/legacy/dds/allow_dds_ld_library_path_as_cmake_var.patch"
-  COMMAND ${patch} -p1 -i "${CMAKE_SOURCE_DIR}/legacy/dds/add_missing_include.patch"
-  COMMAND ${patch} -p1 -i "${CMAKE_SOURCE_DIR}/legacy/dds/fix_deprecated_boost_filesystem.patch"
-  DEPENDS boost ${extract_source_cache_target}
-  ${LOG_TO_FILE}
-)
-ExternalProject_Add_Step(dds build_wn_bin DEPENDEES build DEPENDERS install
-  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/Build/dds
-  COMMAND ${CMAKE_COMMAND} --build . --target wn_bin -j "${NCPUS}"
-  LOG ON
-)
+#list(APPEND packages dds)
+#set(dds_version "3.6")
+#ExternalProject_Add(dds
+#  GIT_REPOSITORY https://github.com/FairRootGroup/DDS GIT_TAG ${dds_version}
+#  ${CMAKE_DEFAULT_ARGS} CMAKE_ARGS
+#    "-DBoost_NO_BOOST_CMAKE=ON"
+#    ${dds_icu_hint}
+#  PATCH_COMMAND ${patch} -p1 -i "${CMAKE_SOURCE_DIR}/legacy/dds/fix_boost_lookup.patch"
+#  COMMAND ${patch} -p1 -i "${CMAKE_SOURCE_DIR}/legacy/dds/allow_dds_ld_library_path_as_cmake_var.patch"
+#  COMMAND ${patch} -p1 -i "${CMAKE_SOURCE_DIR}/legacy/dds/add_missing_include.patch"
+#  COMMAND ${patch} -p1 -i "${CMAKE_SOURCE_DIR}/legacy/dds/fix_deprecated_boost_filesystem.patch"
+#  DEPENDS boost ${extract_source_cache_target}
+#  ${LOG_TO_FILE}
+#)
+#ExternalProject_Add_Step(dds build_wn_bin DEPENDEES build DEPENDERS install
+#  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/Build/dds
+#  COMMAND ${CMAKE_COMMAND} --build . --target wn_bin -j "${NCPUS}"
+#  LOG ON
+#)
 
 list(APPEND packages fairlogger)
 set(fairlogger_version "1.11.0")
@@ -196,60 +196,60 @@ ExternalProject_Add(fairlogger
   ${LOG_TO_FILE}
 )
 
-list(APPEND packages zeromq)
-set(zeromq_version "4.3.4")
-ExternalProject_Add(zeromq
-  GIT_REPOSITORY https://github.com/zeromq/libzmq GIT_TAG v${zeromq_version}
-  ${CMAKE_DEFAULT_ARGS} CMAKE_ARGS
-    "-DWITH_PERF_TOOL=ON"
-    "-DZMQ_BUILD_TESTS=ON"
-    "-DENABLE_CPACK=OFF"
-    "-DENABLE_DRAFTS=OFF"
-  ${LOG_TO_FILE}
-  ${DEPENDS_ON_SOURCE_CACHE}
-)
+#list(APPEND packages zeromq)
+#set(zeromq_version "4.3.4")
+#ExternalProject_Add(zeromq
+#  GIT_REPOSITORY https://github.com/zeromq/libzmq GIT_TAG v${zeromq_version}
+#  ${CMAKE_DEFAULT_ARGS} CMAKE_ARGS
+#    "-DWITH_PERF_TOOL=ON"
+#    "-DZMQ_BUILD_TESTS=ON"
+#    "-DENABLE_CPACK=OFF"
+#    "-DENABLE_DRAFTS=OFF"
+#  ${LOG_TO_FILE}
+#  ${DEPENDS_ON_SOURCE_CACHE}
+#)
 
-list(APPEND packages flatbuffers)
-set(flatbuffers_version "22.9.29")
-ExternalProject_Add(flatbuffers
-  GIT_REPOSITORY https://github.com/google/flatbuffers GIT_TAG v${flatbuffers_version}
-  ${CMAKE_DEFAULT_ARGS} CMAKE_ARGS
-    "-DFLATBUFFERS_BUILD_SHAREDLIB=ON"
-    "-DFLATBUFFERS_BUILD_FLATLIB=OFF"
-  ${LOG_TO_FILE}
-  ${DEPENDS_ON_SOURCE_CACHE}
-)
+#list(APPEND packages flatbuffers)
+#set(flatbuffers_version "22.9.29")
+#ExternalProject_Add(flatbuffers
+#  GIT_REPOSITORY https://github.com/google/flatbuffers GIT_TAG v${flatbuffers_version}
+#  ${CMAKE_DEFAULT_ARGS} CMAKE_ARGS
+#    "-DFLATBUFFERS_BUILD_SHAREDLIB=ON"
+#    "-DFLATBUFFERS_BUILD_FLATLIB=OFF"
+#  ${LOG_TO_FILE}
+#  ${DEPENDS_ON_SOURCE_CACHE}
+#)
 
-list(APPEND packages fairmq)
-set(fairmq_version "1.4.54")
-ExternalProject_Add(fairmq
-  GIT_REPOSITORY https://github.com/FairRootGroup/FairMQ GIT_TAG v${fairmq_version}
-  ${CMAKE_DEFAULT_ARGS}
-  DEPENDS asio boost fairlogger zeromq ${extract_source_cache_target}
-  ${LOG_TO_FILE}
-)
+#list(APPEND packages fairmq)
+#set(fairmq_version "1.4.54")
+#ExternalProject_Add(fairmq
+#  GIT_REPOSITORY https://github.com/FairRootGroup/FairMQ GIT_TAG v${fairmq_version}
+#  ${CMAKE_DEFAULT_ARGS}
+#  DEPENDS asio boost fairlogger zeromq ${extract_source_cache_target}
+#  ${LOG_TO_FILE}
+#)
 
-list(APPEND packages pythia6)
-set(pythia6_version "428-alice1")
-ExternalProject_Add(pythia6
-  URL https://github.com/alisw/pythia6/archive/${pythia6_version}.tar.gz
-  URL_HASH SHA256=b14e82870d3aa33d6fa07f4b1f4d17f1ab80a37d753f91ca6322352b397cb244
-  PATCH_COMMAND ${patch} -p1 -i "${CMAKE_SOURCE_DIR}/legacy/pythia6/add_missing_extern_keyword.patch"
-  ${CMAKE_DEFAULT_ARGS} ${LOG_TO_FILE}
-  ${DEPENDS_ON_SOURCE_CACHE}
-)
+#list(APPEND packages pythia6)
+#set(pythia6_version "428-alice1")
+#ExternalProject_Add(pythia6
+#  URL https://github.com/alisw/pythia6/archive/${pythia6_version}.tar.gz
+#  URL_HASH SHA256=b14e82870d3aa33d6fa07f4b1f4d17f1ab80a37d753f91ca6322352b397cb244
+#  PATCH_COMMAND ${patch} -p1 -i "${CMAKE_SOURCE_DIR}/legacy/pythia6/add_missing_extern_keyword.patch"
+#  ${CMAKE_DEFAULT_ARGS} ${LOG_TO_FILE}
+#  ${DEPENDS_ON_SOURCE_CACHE}
+#)
 
-list(APPEND packages hepmc)
-set(hepmc_version "2.06.11")
-ExternalProject_Add(hepmc
-  URL https://hepmc.web.cern.ch/hepmc/releases/hepmc${hepmc_version}.tgz
-  URL_HASH SHA256=86b66ea0278f803cde5774de8bd187dd42c870367f1cbf6cdaec8dc7cf6afc10
-  ${CMAKE_DEFAULT_ARGS} CMAKE_ARGS
-    "-Dlength:STRING=CM"
-    "-Dmomentum:STRING=GEV"
-  ${LOG_TO_FILE}
-  ${DEPENDS_ON_SOURCE_CACHE}
-)
+#list(APPEND packages hepmc)
+#set(hepmc_version "2.06.11")
+#ExternalProject_Add(hepmc
+#  URL https://hepmc.web.cern.ch/hepmc/releases/hepmc${hepmc_version}.tgz
+#  URL_HASH SHA256=86b66ea0278f803cde5774de8bd187dd42c870367f1cbf6cdaec8dc7cf6afc10
+#  ${CMAKE_DEFAULT_ARGS} CMAKE_ARGS
+#    "-Dlength:STRING=CM"
+#    "-Dmomentum:STRING=GEV"
+#  ${LOG_TO_FILE}
+#  ${DEPENDS_ON_SOURCE_CACHE}
+#)
 
 list(APPEND packages vc)
 set(vc_version "1.4.3")
@@ -277,22 +277,22 @@ ExternalProject_Add_Step(clhep move_dir DEPENDEES download DEPENDERS patch
   LOG ON
 )
 
-list(APPEND packages pythia8)
-set(pythia8_version "8307")
-string(SUBSTRING "${pythia8_version}" 0 2 pythia8_major_version)
-string(TOUPPER "${CMAKE_BUILD_TYPE}" selected)
-ExternalProject_Add(pythia8
-  URL https://pythia.org/download/pythia${pythia8_major_version}/pythia${pythia8_version}.tgz
-  URL_HASH SHA256=e5b14d44aa5943332e32dd5dda9a18fdd1a0085c7198e28d840e04167fa6013d
-  BUILD_IN_SOURCE ON
-  CONFIGURE_COMMAND ${CMAKE_BINARY_DIR}/Source/pythia8/configure
-    "--with-hepmc2=${CMAKE_INSTALL_PREFIX}"
-    "--prefix=${CMAKE_INSTALL_PREFIX}"
-    "--cxx=${CMAKE_CXX_COMPILER}"
-    "--cxx-common='${CMAKE_CXX_FLAGS_${selected}} -fPIC -std=c++${CMAKE_CXX_STANDARD}'"
-  DEPENDS hepmc ${extract_source_cache_target}
-  ${LOG_TO_FILE}
-)
+#list(APPEND packages pythia8)
+#set(pythia8_version "8307")
+#string(SUBSTRING "${pythia8_version}" 0 2 pythia8_major_version)
+#string(TOUPPER "${CMAKE_BUILD_TYPE}" selected)
+#ExternalProject_Add(pythia8
+#  URL https://pythia.org/download/pythia${pythia8_major_version}/pythia${pythia8_version}.tgz
+#  URL_HASH SHA256=e5b14d44aa5943332e32dd5dda9a18fdd1a0085c7198e28d840e04167fa6013d
+#  BUILD_IN_SOURCE ON
+#  CONFIGURE_COMMAND ${CMAKE_BINARY_DIR}/Source/pythia8/configure
+#    "--with-hepmc2=${CMAKE_INSTALL_PREFIX}"
+#    "--prefix=${CMAKE_INSTALL_PREFIX}"
+#    "--cxx=${CMAKE_CXX_COMPILER}"
+#    "--cxx-common='${CMAKE_CXX_FLAGS_${selected}} -fPIC -std=c++${CMAKE_CXX_STANDARD}'"
+#  DEPENDS hepmc ${extract_source_cache_target}
+#  ${LOG_TO_FILE}
+#)
 
 list(APPEND packages geant4)
 set(geant4_version "11.0.3")
@@ -313,8 +313,8 @@ ExternalProject_Add(geant4
     "-DGEANT4_USE_SYSTEM_CLHEP=ON"
     "-DGEANT4_USE_SYSTEM_EXPAT=ON"
     "-DGEANT4_USE_SYSTEM_ZLIB=ON"
-    "-DGEANT4_USE_G3TOG4=ON"
-    "-DGEANT4_USE_GDML=ON"
+    "-DGEANT4_USE_G3TOG4=OFF"
+    "-DGEANT4_USE_GDML=OFF"
     "-DGEANT4_USE_OPENGL_X11=OFF"
     "-DGEANT4_USE_RAYTRACER_X11=OFF"
     "-DGEANT4_USE_PYTHON=ON"
@@ -327,66 +327,66 @@ ExternalProject_Add(geant4
   ${LOG_TO_FILE}
 )
 
-list(APPEND packages root)
-set(root_version "6.26.10")
-string(REPLACE "\." "-" root_version_gittag ${root_version})
-if(APPLE AND CMAKE_VERSION VERSION_GREATER 3.15)
-  set(root_builtin_glew "-Dbuiltin_glew=ON")
-endif()
-if(APPLE)
-  set(root_cocoa "-Dcocoa=ON")
-  set(root_x11 OFF)
-else()
-  unset(root_cocoa)
-  set(root_x11 ON)
-endif()
-if(CMAKE_CXX_COMPILER_ID STREQUAL GNU AND CMAKE_CXX_COMPILER_VERSION GREATER 11)
-  set(root_runtime_cxxmodules "-Druntime_cxxmodules=OFF")
-endif()
-ExternalProject_Add(root
-  GIT_REPOSITORY https://github.com/root-project/root/ GIT_TAG v${root_version_gittag}
-  GIT_SHALLOW 1
-  PATCH_COMMAND ${patch} -p1 -i "${CMAKE_SOURCE_DIR}/legacy/root/fix_compilation_with_gcc12.patch"
-  COMMAND ${patch} -p1 -i "${CMAKE_SOURCE_DIR}/legacy/root/fix_pyroot_code_h_inclusion_python_3_11.patch"
-  COMMAND ${patch} -p1 -i "${CMAKE_SOURCE_DIR}/legacy/root/fix_tpython_python_3_11_deprecation.patch"
-  COMMAND ${patch} -p1 -i "${CMAKE_SOURCE_DIR}/legacy/root/fix_pyroot_cast_error_python_3_11.patch"
-  COMMAND ${patch} -p1 -i "${CMAKE_SOURCE_DIR}/legacy/root/fix_root_install_external_tars_with_cmake_3_24.patch"
-  ${CMAKE_DEFAULT_ARGS} CMAKE_ARGS
-    "-Daqua=ON"
-    "-Dasimage=ON"
-    "-Dbuiltin_nlohmannjson=ON"
-    "-Dcintex=OFF"
-    "-Ddavix=OFF"
-    "-Dfftw3=ON"
-    "-Dfortran=ON"
-    "-Dgdml=ON"
-    "-Dglobus=OFF"
-    "-Dgnuinstall=ON"
-    "-Dhttp=ON"
-    "-Dmathmore=ON"
-    "-Dminuit2=ON"
-    "-Dmlp=ON"
-    "-Dpyroot=ON"
-    "-Dreflex=OFF"
-    "-Droofit=ON"
-    "-Drpath=ON"
-    "-Dsoversion=ON"
-    "-Dspectrum=ON"
-    "-Dsqlite=ON"
-    "-Dtmva=ON"
-    "-Dvc=ON"
-    "-Dvdt=OFF"
-    "-Dxml=ON"
-    "-Dxrootd=ON"
-    "-Dx11=${root_x11}"
-    ${cmake_python_config}
-    ${cmake_python_config_old}
-    ${root_builtin_glew}
-    ${root_cocoa}
-    ${root_runtime_cxxmodules}
-  DEPENDS pythia6 pythia8 vc ${extract_source_cache_target}
-  ${LOG_TO_FILE}
-)
+#list(APPEND packages root)
+#set(root_version "6.26.10")
+#string(REPLACE "\." "-" root_version_gittag ${root_version})
+#if(APPLE AND CMAKE_VERSION VERSION_GREATER 3.15)
+#  set(root_builtin_glew "-Dbuiltin_glew=ON")
+#endif()
+#if(APPLE)
+#  set(root_cocoa "-Dcocoa=ON")
+#  set(root_x11 OFF)
+#else()
+#  unset(root_cocoa)
+#  set(root_x11 ON)
+#endif()
+#if(CMAKE_CXX_COMPILER_ID STREQUAL GNU AND CMAKE_CXX_COMPILER_VERSION GREATER 11)
+#  set(root_runtime_cxxmodules "-Druntime_cxxmodules=OFF")
+#endif()
+#ExternalProject_Add(root
+#  GIT_REPOSITORY https://github.com/root-project/root/ GIT_TAG v${root_version_gittag}
+#  GIT_SHALLOW 1
+#  PATCH_COMMAND ${patch} -p1 -i "${CMAKE_SOURCE_DIR}/legacy/root/fix_compilation_with_gcc12.patch"
+#  COMMAND ${patch} -p1 -i "${CMAKE_SOURCE_DIR}/legacy/root/fix_pyroot_code_h_inclusion_python_3_11.patch"
+#  COMMAND ${patch} -p1 -i "${CMAKE_SOURCE_DIR}/legacy/root/fix_tpython_python_3_11_deprecation.patch"
+#  COMMAND ${patch} -p1 -i "${CMAKE_SOURCE_DIR}/legacy/root/fix_pyroot_cast_error_python_3_11.patch"
+#  COMMAND ${patch} -p1 -i "${CMAKE_SOURCE_DIR}/legacy/root/fix_root_install_external_tars_with_cmake_3_24.patch"
+#  ${CMAKE_DEFAULT_ARGS} CMAKE_ARGS
+#    "-Daqua=ON"
+#    "-Dasimage=ON"
+#    "-Dbuiltin_nlohmannjson=ON"
+#    "-Dcintex=OFF"
+#    "-Ddavix=OFF"
+#    "-Dfftw3=ON"
+#    "-Dfortran=ON"
+#    "-Dgdml=ON"
+#    "-Dglobus=OFF"
+#    "-Dgnuinstall=ON"
+#    "-Dhttp=ON"
+#    "-Dmathmore=ON"
+#    "-Dminuit2=ON"
+#    "-Dmlp=ON"
+#    "-Dpyroot=ON"
+#    "-Dreflex=OFF"
+#    "-Droofit=ON"
+#    "-Drpath=ON"
+#    "-Dsoversion=ON"
+#    "-Dspectrum=ON"
+#    "-Dsqlite=ON"
+#    "-Dtmva=ON"
+#    "-Dvc=ON"
+#    "-Dvdt=OFF"
+#    "-Dxml=ON"
+#   "-Dxrootd=ON"
+#   "-Dx11=${root_x11}"
+#    ${cmake_python_config}
+#    ${cmake_python_config_old}
+#    ${root_builtin_glew}
+#    ${root_cocoa}
+#    ${root_runtime_cxxmodules}
+#  DEPENDS pythia6 pythia8 vc ${extract_source_cache_target}
+#  ${LOG_TO_FILE}
+#)
 
 list(APPEND packages vmc)
 set(vmc_version "2-0")
@@ -396,15 +396,15 @@ ExternalProject_Add(vmc
   DEPENDS root ${extract_source_cache_target}
 )
 
-list(APPEND packages geant3)
-set(geant3_version "4-1_fairsoft")
-ExternalProject_Add(geant3
-  GIT_REPOSITORY https://github.com/FairRootGroup/geant3 GIT_TAG v${geant3_version}
-  ${CMAKE_DEFAULT_ARGS} CMAKE_ARGS
-    "-DBUILD_GCALOR=ON"
-  DEPENDS root vmc ${extract_source_cache_target}
-  ${LOG_TO_FILE}
-)
+#list(APPEND packages geant3)
+#set(geant3_version "4-1_fairsoft")
+#ExternalProject_Add(geant3
+#  GIT_REPOSITORY https://github.com/FairRootGroup/geant3 GIT_TAG v${geant3_version}
+#  ${CMAKE_DEFAULT_ARGS} CMAKE_ARGS
+#    "-DBUILD_GCALOR=ON"
+#  DEPENDS root vmc ${extract_source_cache_target}
+#  ${LOG_TO_FILE}
+#)
 
 list(APPEND packages vgm)
 set(vgm_version "5-0")
@@ -430,33 +430,33 @@ ExternalProject_Add(geant4_vmc
   ${LOG_TO_FILE}
 )
 
-list(APPEND packages onnxruntime)
-set(onnxruntime_version "1.12.1")
-ExternalProject_Add(onnxruntime
-  PATCH_COMMAND ${patch} -p1 -i "${CMAKE_SOURCE_DIR}/legacy/onnxruntime/install_config_files.patch"
-  COMMAND ${patch} -p1 -i "${CMAKE_SOURCE_DIR}/legacy/onnxruntime/fix_python_detection.patch"
-  GIT_REPOSITORY https://github.com/microsoft/onnxruntime/ GIT_TAG v${onnxruntime_version}
-  GIT_SHALLOW ON
-  GIT_SUBMODULES
-    "cmake/external/SafeInt"
-    "cmake/external/date"
-    "cmake/external/flatbuffers" # at the moment, there is no option to consume external
-    "cmake/external/json"
-    "cmake/external/mp11"
-    "cmake/external/nsync"
-    "cmake/external/onnx"
-    "cmake/external/protobuf" # TODO explore, if we can offer this as separate pkg (conditionally?)
-    "cmake/external/pytorch_cpuinfo"
-    "cmake/external/re2"
-    "cmake/external/eigen"
-  SOURCE_SUBDIR cmake
-  ${CMAKE_DEFAULT_ARGS} CMAKE_ARGS
-    "-Donnxruntime_BUILD_UNIT_TESTS=OFF"
-    "-Donnxruntime_BUILD_SHARED_LIB=ON"
-  DEPENDS ${extract_source_cache_target}
-  EXCLUDE_FROM_ALL ON
-  ${LOG_TO_FILE}
-)
+#list(APPEND packages onnxruntime)
+#set(onnxruntime_version "1.12.1")
+#ExternalProject_Add(onnxruntime
+#  PATCH_COMMAND ${patch} -p1 -i "${CMAKE_SOURCE_DIR}/legacy/onnxruntime/install_config_files.patch"
+#  COMMAND ${patch} -p1 -i "${CMAKE_SOURCE_DIR}/legacy/onnxruntime/fix_python_detection.patch"
+#  GIT_REPOSITORY https://github.com/microsoft/onnxruntime/ GIT_TAG v${onnxruntime_version}
+#  GIT_SHALLOW ON
+#  GIT_SUBMODULES
+#    "cmake/external/SafeInt"
+#    "cmake/external/date"
+#    "cmake/external/flatbuffers" # at the moment, there is no option to consume external
+#    "cmake/external/json"
+#    "cmake/external/mp11"
+#    "cmake/external/nsync"
+#    "cmake/external/onnx"
+#    "cmake/external/protobuf" # TODO explore, if we can offer this as separate pkg (conditionally?)
+#    "cmake/external/pytorch_cpuinfo"
+#   "cmake/external/re2"
+#    "cmake/external/eigen"
+#  SOURCE_SUBDIR cmake
+#  ${CMAKE_DEFAULT_ARGS} CMAKE_ARGS
+#    "-Donnxruntime_BUILD_UNIT_TESTS=OFF"
+#    "-Donnxruntime_BUILD_SHARED_LIB=ON"
+#  DEPENDS ${extract_source_cache_target}
+#  EXCLUDE_FROM_ALL ON
+#  ${LOG_TO_FILE}
+#)
 
 ExternalProject_Add(fairsoft-config
   GIT_REPOSITORY https://github.com/FairRootGroup/fairsoft-config GIT_TAG master
